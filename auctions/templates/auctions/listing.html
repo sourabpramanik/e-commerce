@@ -1,0 +1,174 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+{{listing.product_name}}
+{% endblock %}
+
+{% block body %}
+
+<div class="row listing-page-end-result">
+    <div class="col-12">
+        {% if listing.closed %}
+        {% if owner %}
+        {% if listing.current_winning_bidder %}
+        <div>Your item was SOLD to {{ listing.current_winning_bidder }}</div>
+        {% else %}
+        <div> Bidding Closed.</div>
+        {% endif %}
+        {% else %}
+        {%  if listing.current_winning_bidder == user %}
+        <div><strong style="color: rgb(0, 255, 85);">Congratulations!!! You have won this auction</strong></div>
+        {% elif listing.current_winning_bidder is None %}
+        <div><strong style="color: red;">Nobody showed any interest on this item and it has been closed.</strong></div>
+        {% else %}
+        <div><strong style="color: red;">An anonymous user has won this auction!</strong></div>
+        {% endif %}
+        {% endif %}
+        {% else %}
+        <div><img src="https://www.visair.co.uk/wp-content/uploads/2020/04/Live.gif" height="40" width="80"></div>
+        {% endif %}
+    </div>
+</div>
+<main class="container">
+    <div class="left-column">
+        <img width="350" height="350"
+            src="{% if listing.image %}{{ listing.image }} {%else%} No Images {%endif%}" alt="listing  image"
+            class="disp_list" style="top: 10%;">
+    </div>
+
+    <div class="right-column" style="text-align: justify;">
+        <div class="col-6 listing-page-right-half">
+            <div class="container">
+                <div class="row watchlist-section no-gutters align-items-center">
+                    {% if user.is_authenticated %}
+                    <div class="col-2">
+                        <form action="{% url 'watchlist' listing.pk %}" method="POST">
+                            {% csrf_token %}
+                            <div class="watchicon">
+                                {% if is_watchlist %}
+                                <button type="submit" class="btn btn-outline-primary btn-sm" style="width: 4cm;">In
+                                    Watchlist</button>
+                                {% else %}
+                                <button type="submit" class="btn btn-outline-secondary btn-sm" style="width: 4cm;">Add
+                                    to Watchlist</button>
+                                {%endif%}
+                            </div>
+                        </form>
+                    </div>
+                    {% else %}
+                    <p> Log in to add item to your watchlist!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="product-description">
+            <a href="{% url 'category' listing.category %}"><span>Category: {{listing.category}}</span></a>
+
+            <h2
+                style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color:black">
+                {{listing.product_name}}</h2>
+            </br>
+            <p>{{listing.description}}</p>
+            </br>
+            <span>Created at {{listing.date_time}}</span>
+            </br>
+            <hr>
+            <div class="bids">
+                Number of bids made: <strong style="color: black;">{{ listing.no_of_bids }}</strong>
+            </div>
+            </br>
+            <span style="font-size: 20px;">Highest Bid: $ {{ listing.current_price }}</span>
+            <div class="product-price">
+                Starting Price: $ {{listing.price}}
+            </div>
+        </div>
+
+        <div class="listing-page-bid-section">
+            <h5 style="text-align:center;">Enter Your Bidding!</h5>
+            {% if user.is_authenticated %}
+            {%  if listing.closed %}
+            <p class="listing-closed-info">This listing has been closed!</p>
+            {% endif %}
+            <fieldset {% if listing.closed %} disabled class="disabled" {% endif %}>
+                <form method="post" action="{% url 'createbid' listing.pk %}">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form-group row">
+                        <label class="col-3 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}: </label>
+                        <div class="col-9" id="bid-box">
+                            {{ field }}
+                            {{ field.errors }}
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-outline-primary" style="width: 100%;">Make bid</button>
+                </form>
+            </fieldset>
+            {% else %}
+            {% if listing.closed %}
+            <p>This item listing has been closed!</p>
+            {% else %}
+            <p>Please sign in to bid on this item!</p>
+            {% endif %}
+            {% endif %}
+
+
+
+
+        </div>
+
+        </br> </br>
+
+</main>
+<hr>
+<h3>Comments</h3>
+<div class="comment">
+    {% for comment in listing.comments.all %}
+    <div class="row each-comment">
+        <div class="col">
+            <h6><strong style="color: black;">{{ comment.author }}</strong> commented:</h6>
+            <p> {{ comment.body }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="postcomment">
+        {%if user.is_authenticated %}
+        <div class="row type-your-comment">
+            <div class="col">
+                <form action="{% url 'comment' listing.pk %}" method="post" id="comment-form" class="form-inline">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <textarea id="comment" name="comment" placeholder="type your comment here..."
+                            class="pb-cmnt-textarea"></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <button class="btn btn-primary pull-right" type="submit" value="Submit">Share</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <p>Sign in to submit your own comments!</p>
+        {%endif%}
+    </div>
+    </br>
+    {%  if owner %}
+
+    {% if not listing.closed %}
+    <form class="row listing-page-bid-close-section" method="POST" action="{% url 'closelisting' listing.pk %}">
+        {%  csrf_token %}
+        <button class="btn btn-outline-danger" style="width: 100%;">Close this listing</button>
+    </form>
+    {% endif %}
+
+
+    {% endif %}
+
+
+
+    <hr />
+
+    {% endblock %}

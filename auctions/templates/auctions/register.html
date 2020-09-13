@@ -1,0 +1,49 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+
+
+{% if message %}
+<div>{{ message }}</div>
+{% endif %}
+
+<div class="register-box">
+    <h2>Register</h2>
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+
+        <div class="text">
+            <i class="material-icons md-24">person_outline</i><input class="form-control" autofocus type="text"
+                name="first name" placeholder="First Name">
+        </div>
+        <div class="text">
+            <i class="material-icons md-24">person_outline</i><input class="form-control" autofocus type="text"
+                name="last name" placeholder="Last Name">
+        </div>
+        <div class="text">
+            <i class="material-icons md-24">recent_actors</i><input class="form-control" autofocus type="text"
+                name="username" placeholder="Username">
+        </div>
+        <div class="text">
+            <i class="material-icons md-24">alternate_email</i><input class="form-control" type="email" name="email"
+                placeholder="Email Address">
+        </div>
+        <div class="text">
+            <i class="material-icons md-24">lock</i><input class="form-control" type="password" name="password"
+                placeholder="Password">
+        </div>
+        <div class="text">
+            <i class="material-icons md-24">lock</i><input class="form-control" type="password" name="confirmation"
+                placeholder="Confirm Password">
+        </div>
+        <div class="button">
+            <input class="btn btn-primary" type="submit" value="Register">
+        </div>
+        <hr></br>
+        Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    </form>
+</div>
+
+
+{% endblock %}

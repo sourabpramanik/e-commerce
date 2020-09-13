@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+Create Listing
+{% endblock %}
+
+{% block body %}
+<h2 style="text-align: center">Create a Listing</h2>
+<hr>
+<form method="post" action="{% url 'createlisting' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group row">
+        <label class="col-2 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}: </label>
+        <div class="col-9">
+
+            {{ field }}
+
+        </div>
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-outline-primary" style="width: 100%;">Create listing!</button>
+</form>
+{% endblock %}

@@ -1,0 +1,191 @@
+body {
+  font-family: "Inconsolata", monosapce;
+  color: hsl(208, 55%, 11%);
+  padding: 20px;
+  padding-top: 0px;
+  background-color: azure;
+
+}
+.login-box{
+  
+  width: 280px;
+  position: absolute;
+  top: 22%;
+  left: 39%;
+  transform: translate();
+}
+.login-box h2{
+  float: left;
+  font-size: 40px;
+  border-bottom: 3px solid rgb(59, 171, 223);
+  margin-bottom: 20px;
+  padding: 13px;
+  color: rgb(59, 171, 223);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.text{
+  width: 100%;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px;
+  margin: 8px;
+  border-bottom: thin solid rgb(59, 171, 223);
+}
+.text input{
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: 80%;
+  float: left;
+
+}
+.button input{
+  border: rgb(59, 171, 223);
+
+  color:rgb(59, 171, 223);
+  background-color: transparent;
+  font-size: medium;
+  width: 100%;
+}
+.register-box{
+  width: 680px;
+  position: absolute;
+  top: 30%;
+  left: 9%;
+  transform: translate();
+}
+.register-box h2{
+  float: left;
+  font-size: 40px;
+  border-bottom: 3px solid rgb(59, 171, 223);
+  margin-bottom: 20px;
+  padding: 13px;
+  color: rgb(59, 171, 223);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.form-group {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+a {
+  color: darkslategrey;
+  font-family: "Raleway", sans-serif;
+}
+h1{
+    font-family: 'Domine', serif;
+    text-align: center;
+}
+
+
+#navi{
+  width: auto;
+  height: 10%;
+}
+strong{
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+}
+.nav-link{
+  border-right: solid thin darkslategray;
+}
+.navbar-brand{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: xx-large;
+  border-bottom: solid thin white;
+  padding-left: 5px;
+}
+.closedlisting {
+  font-size: 12px;
+  color: gray;
+}
+fieldset.disabled {
+  background: white;
+  opacity: 0.4;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+}
+.left-column {
+  width: 65%;
+  position: relative;
+}
+ 
+.right-column {
+  width: 35%;
+  
+}
+.left-column img {
+  width: 90%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.product-description {
+  border-bottom: 1px solid #E1E8EE;
+  margin-bottom: 20px;
+}
+.product-description span {
+  font-size: 12px;
+  color: #358ED7;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.product-description h1 {
+  font-weight: 300;
+  font-size: 45px;
+  color: #E1E8EE;
+  letter-spacing: -2px;
+}
+.product-description p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #86939E;
+  line-height: 24px;
+}
+.bidbutton {
+  display: inline-block;
+  background-color: #7DC855;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 12px 30px;
+  transition: all .5s;
+}
+.bidbutton:hover {
+  background-color: #64af3d;
+}
+td{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    font-family: 'Fira Sans', sans-serif;
+    padding-top: 40px;
+    padding-left: 520px;
+
+}
+.pb-cmnt-textarea {
+  resize: none;
+  padding: 20px;
+  height: 100px;
+  width: 500px;
+  border: 1px solid #43484D;
+  box-shadow: #43484D;
+  border-radius: 5px;
+}
+#bid-box{
+  right: 15%;
+}
+#area{
+  background: none;
+  border: none;
+  outline: none ;
+}
+.list-group-item{
+  width: 50%;
+}

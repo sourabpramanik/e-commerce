@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="{% static 'auctions/style.css' %}" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Changa:wght@200&family=Nova+Slim&family=Lexend+Peta&family=Domine&display=swap&family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <div class="headercontent">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navi">
+            <a class="navbar-brand" href="{% url 'index' %}">AUCTION</a>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Active Listing</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'createlisting' %}">Create Listing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'watchlistitems' %}">Watchlist Items</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'categories'  %}">Categories</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <ul class="navbar-nav mr-auto">
+                        {% if user.is_authenticated %}
+                        <strong>Welcome, {{ user.username }}</strong>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span>
+                                Log
+                                Out</a>
+                        </li>
+
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}"><span
+                                    class="glyphicon glyphicon-user"></span> Sign
+                                Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}"><span
+                                    class="glyphicon glyphicon-log-in"></span>
+                                Login</a>
+                        </li>
+                        {%endif%}
+                    </ul>
+                </span>
+            </div>
+        </nav>
+    </div>
+    {% block body %}
+    {% endblock %}
+</body>
+
+</html>
